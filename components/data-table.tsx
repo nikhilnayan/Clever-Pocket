@@ -24,7 +24,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import { useConfirm } from "@/features/accounts/hooks/use-confirm"
+import { useConfirm } from "@/hooks/use-confirm"
 import { Button } from "./ui/button"
 import { Input } from "@/components/ui/input"
 
