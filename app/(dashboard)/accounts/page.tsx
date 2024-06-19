@@ -9,7 +9,7 @@ import { DataTable } from "@/components/data-table"
 
 import { columns } from "./columns"
 import { Skeleton } from "@/components/ui/skeleton"
-import { useBulkDeleteAccounts } from "@/features/accounts/api/use-bulk-delete"
+import { useBulkDeleteAccounts } from "@/features/accounts/api/use-bulk-delete-accounts"
 
 const AccountsPage = () => {
 
@@ -50,7 +50,7 @@ const AccountsPage = () => {
                     </Button>
                 </CardHeader>
                 <CardContent>
-                    <DataTable filterKey="email" columns={columns} data={accounts} onDelete={(row) => {
+                    <DataTable filterKey="name" columns={columns} data={accounts} onDelete={(row) => {
                         const ids = row.map((r) => r.original.id)
                         deleteAccounts.mutate({ids})
                     }} disabled={isDisabled} />
