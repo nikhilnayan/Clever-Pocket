@@ -16,7 +16,8 @@ const app = new Hono()
             to: z.string().optional(),
             accountId: z.string().optional(),
         })),
-        clerkMiddleware(), async (c) => {
+        clerkMiddleware(),
+        async (c) => {
 
             const auth = getAuth(c)
             const { from, to, accountId } = c.req.valid("query")
