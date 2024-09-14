@@ -23,7 +23,6 @@ const app = new Hono()
             const { from, to, accountId } = c.req.valid("query")
 
             if (!auth?.userId) {
-
                 return c.json({ error: "Unauthorized" }, 401)
             }
 
@@ -117,8 +116,7 @@ const app = new Hono()
             const auth = getAuth(c)
             const values = c.req.valid("json")
 
-            if (!auth?.userId) {
-
+            if (!auth?.userId) { 
                 return c.json({ error: "Unauthorized" }, 401)
             }
 
@@ -173,15 +171,12 @@ const app = new Hono()
 
             const transactionsToDelete = db.$with("transactions_to_delete")
                 .as(
-                    db
-                        .select({ id: transactions.id })
-                        .from(transactions)
+                    db.select({ id: transactions.id }).from(transactions)
                         .innerJoin(accounts, eq(transactions.accountId, accounts.id))
                         .where(and(
                             inArray(transactions.id, values.ids),
                             eq(accounts.userId, auth.userId)
                         ))
-
                 )
 
             const data = await db
@@ -256,7 +251,7 @@ const app = new Hono()
         clerkMiddleware(),
         zValidator("param", z.object({
             id: z.string().optional()
-        }),
+        })
         ),
         async (c) => {
             const auth = getAuth(c)
@@ -280,7 +275,6 @@ const app = new Hono()
                             eq(transactions.id, id),
                             eq(accounts.userId, auth.userId)
                         ))
-
                 )
 
             const [data] = await db
@@ -289,12 +283,10 @@ const app = new Hono()
                 .where(
                     inArray(
                         transactions.id,
-                        sql`(select id from ${transactionsToDelete}`
+                        sql`(select id from ${transactionsToDelete})`
                     )
                 )
-                .returning({
-                    id: transactions.id,
-                })
+                .returning({ id: transactions.id })
 
             if (!data) {
                 return c.json({ error: "Not Found" }, 404)

@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query"
 import { client } from "@/lib/hono";
 import { useSearchParams } from "next/navigation";
+import { convertAmountFromMiliunits } from "@/lib/utils";
 
 
 export const useGetTransactions = () => {
 
-    const param = useSearchParams()
-    const from = param.get("from") || ""
-    const to = param.get("to") || ""
-    const accountId = param.get("accountsId") || ""
+    const params = useSearchParams()
+    const from = params.get("from") || ""
+    const to = params.get("to") || ""
+    const accountId = params.get("accountId") || ""
 
     const query = useQuery({
-        //TODO: check if param are needed inthe key
         queryKey: ["transactions", { from, to, accountId }],
         queryFn: async () => {
             const response = await client.api.transactions.$get({
@@ -27,7 +27,10 @@ export const useGetTransactions = () => {
             }
 
             const { data } = await response.json()
-            return data
+            return data.map((transaction) => ({
+                ...transaction,
+                amount: convertAmountFromMiliunits(transaction.amount)
+            }))
         }
     })
     return query

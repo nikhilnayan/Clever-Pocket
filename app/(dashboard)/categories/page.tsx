@@ -42,7 +42,7 @@ const CategoriesPage = () => {
             <Card className="border-none drop-shadow-sw">
                 <CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
                     <CardTitle className="text-xl line-clamp-1">
-                    Categories Page
+                        Categories Page
                     </CardTitle>
                     <Button onClick={newCategory.onOpen} size="sm">
                         <Plus className="size-4 mr-2" />
@@ -50,10 +50,14 @@ const CategoriesPage = () => {
                     </Button>
                 </CardHeader>
                 <CardContent>
-                    <DataTable filterKey="name" columns={columns} data={categories} onDelete={(row) => {
-                        const ids = row.map((r) => r.original.id)
-                        deleteCategories.mutate({ids})
-                    }} disabled={isDisabled} />
+                    <DataTable
+                        filterKey="name"
+                        columns={columns}
+                        data={categories}
+                        onDelete={(row) => {
+                            const ids = row.map((r) => r.original.id)
+                            deleteCategories.mutate({ ids })
+                        }} disabled={isDisabled} />
 
                 </CardContent>
             </Card>

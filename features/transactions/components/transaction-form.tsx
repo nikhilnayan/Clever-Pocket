@@ -10,7 +10,7 @@ import { Select } from "@/components/select"
 import { DatePicker } from "@/components/date-picker"
 import { Textarea } from "@/components/ui/textarea"
 import { AmountInput } from "@/components/amount-input"
-import { convertAmountToMilounits } from "@/lib/utils"
+import { convertAmountToMiliunits } from "@/lib/utils"
 
 const formSchema = z.object({
     date: z.coerce.date(),
@@ -57,8 +57,9 @@ export const TransactionForm = ({
     })
 
     const handleSubmit = (values: FormValues) => {
+        // console.log(values)
         const amount = parseFloat(values.amount)
-        const amountInMiliunits = convertAmountToMilounits(amount)
+        const amountInMiliunits = convertAmountToMiliunits(amount)
 
         onSubmit({
             ...values,
@@ -79,7 +80,7 @@ export const TransactionForm = ({
                             <DatePicker
                                 value={field.value}
                                 onChange={field.onChange}
-                                disabled={false}
+                                disabled={disabled}
                             />
                         </FormControl>
                     </FormItem>
