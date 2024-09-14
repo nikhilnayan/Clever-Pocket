@@ -27,9 +27,9 @@ export const Actions = ({ id }: Props) => {
     const handleDelete = async () => {
         const ok = await confirm()
 
-        if (ok) {
-            deleteMutation.mutate()
-        }
+        // if (ok) {
+        //     deleteMutation.mutate(id)
+        // }
     }
 
     return (
