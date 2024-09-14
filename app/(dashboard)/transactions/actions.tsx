@@ -25,11 +25,20 @@ export const Actions = ({ id }: Props) => {
     const { onOpen } = useOpenTransaction()
 
     const handleDelete = async () => {
+
+        // try {
+        //     const ok = await confirm();
+        //     if (ok) {
+        //         await deleteMutation.mutateAsync(); // Use mutateAsync for handling promises
+        //     }
+        // } catch (error) {
+        //     console.error('Error deleting transaction:', error);
+        // }
         const ok = await confirm()
 
-        // if (ok) {
-        //     deleteMutation.mutate(id)
-        // }
+        if (ok) {
+            deleteMutation.mutate(id)
+        }
     }
 
     return (

@@ -73,16 +73,31 @@ export const EditTransactionSheet = () => {
         })
     }
 
-    const onDelete = async () => {
-        const ok = await confirm()
+    // const onDelete = async () => {
+    //     const ok = await confirm()
 
-        if (ok) {
-            deleteMutation.mutate(undefined, {
-                onSuccess: () => {
-                    onClose()
-                }
-            });
-        }
+    //     if (ok) {
+    //         deleteMutation.mutate(undefined,{
+    //             onSuccess: () => {
+    //                 onClose()
+    //             }
+    //         });
+    //     }
+    // }
+
+    //TODO: Resolve to OnDelete function
+
+    const handleDelete = async () => {
+
+        // try {
+        //     const ok = await confirm();
+        //     if (ok) {
+        //         await deleteMutation.mutateAsync(); // Use mutateAsync for handling promises
+        //     }
+        // } catch (error) {
+        //     console.error('Error deleting transaction:', error);
+        // }
+        
     }
     const defaultValues = transactionQuery.data ? {
         accountId: transactionQuery.data.accountId,
@@ -126,7 +141,7 @@ export const EditTransactionSheet = () => {
                                 id={id}
                                 defaultValues={defaultValues}
                                 onSubmit={onSubmit}
-                                onDelete={onDelete}
+                                onDelete={handleDelete}
                                 disabled={isPending}
                                 categoryOptions={categoryOptions}
                                 onCreateCategory={onCreateCategory}
