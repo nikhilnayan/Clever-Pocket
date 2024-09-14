@@ -1,7 +1,6 @@
 import { z } from "zod"
 import { TransactionForm } from "./transaction-form"
 import { insertTransactionSchema } from "@/db/schema"
-import { useNewAccount } from "@/features/accounts/hooks/use-new-account"
 import {
     Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle
 } from "@/components/ui/sheet"
@@ -82,17 +81,17 @@ export const EditTransactionSheet = () => {
                 onSuccess: () => {
                     onClose()
                 }
-            })
+            });
         }
     }
     const defaultValues = transactionQuery.data ? {
         accountId: transactionQuery.data.accountId,
         categoryId: transactionQuery.data.categoryId,
         amount: transactionQuery.data.amount.toString(),
-        date: transactionQuery.data.date ? new Date(
-            transactionQuery.data.date
-        )
+        date: transactionQuery.data.date
+            ? new Date(transactionQuery.data.date)
             : new Date,
+
         payee: transactionQuery.data.payee,
         notes: transactionQuery.data.notes,
     } : {

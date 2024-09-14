@@ -10,19 +10,23 @@ export const useDeleteTransaction = (id?: string) => {
     const queryClient = useQueryClient()
 
     const mutation = useMutation<
-    ResponseType,
-     Error,
-     RequestType
-     >({
+        ResponseType,
+        Error,
+        RequestType
+    >({
         mutationFn: async () => {
+            
+            
             const response = await client.api.transactions[":id"]["$delete"]({ param: { id } })
+
+            
             return await response.json()
         },
         onSuccess: () => {
-            toast.success("transaction Deleted")
+            toast.success("Transaction Deleted")
             queryClient.invalidateQueries({ queryKey: ["transaction", { id }] })
             queryClient.invalidateQueries({ queryKey: ["transactions"] })
-            //TODO: add the summery
+            queryClient.invalidateQueries({ queryKey: ["summary"] })
         },
         onError: (error) => {
             console.error(error)
