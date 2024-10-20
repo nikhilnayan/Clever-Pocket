@@ -13,8 +13,8 @@ export const useDeleteTransaction = (id?: string) => {
         // void,
         ResponseType,
         Error,
-        string
-        // RequestType
+        string,
+        RequestType
     >({
         mutationFn: async (id: string) => {
 
